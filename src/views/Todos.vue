@@ -1,21 +1,23 @@
 <template>
   <div>
-    <div>
+    <div class="addToDo">
       <h2>Add a To-do</h2>
       <input type="text"
         v-model="todoText"
         @keydown.enter="addTodo">
     </div>
     <h1>Todos</h1>
-    <div v-for="(todo, index) in todos"
+    <div class="toDoList" 
+      v-for="(todo, index) in todos"
       :key="index">
-      {{todo.text}} 
-      <br /> 
-      <button @click="removeTodo(index)" title="Remove todo">&times;</button>
-      <button v-if="!todo.done" @click="markAsDone(index)" title="Mark as done">&check;</button>
-      <button v-if="todo.done" @click="markAsUndone(index)" title="Mark as undone">&#8630;</button>
-      <br />
-      {{todo.createdAt.toString()}}
+      <span :class="{ done: todo.done }"> {{todo.text}} </span>
+      <div>
+        <button @click="removeTodo(index)" title="Remove todo">&times;</button>
+        <button v-if="!todo.done" @click="markAsDone(index)" title="Mark as done">&check;</button>
+        <button v-if="todo.done" @click="markAsUndone(index)" title="Mark as undone">&#8630;</button>
+      
+        {{todo.createdAt.toString()}}
+      </div>      
     </div>
     <div v-if="todos.length ===0">
       You don't have any task to do.
@@ -69,3 +71,21 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+.addToDo {
+  width:50%;
+  padding:10px;
+  border:solid;
+  margin-left:auto;
+  margin-right: auto;
+}
+.toDoList {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+  padding: 0px;
+}
+.done {
+  text-decoration: line-through;
+}
+</style>
