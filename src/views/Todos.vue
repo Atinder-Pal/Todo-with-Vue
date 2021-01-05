@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div>
+      <h2>Add a To-do</h2>
+      <input type="text"
+        v-model="todoText"
+        @keydown.enter="addTodo">
+    </div>
     <h1>Todos</h1>
     <div v-for="(todo, index) in todos"
       :key="index">
@@ -14,12 +20,7 @@
     <div v-if="todos.length ===0">
       You don't have any task to do.
     </div>
-    <div>
-      <h2>Add a To-do</h2>
-      <input type="text"
-        v-model="todoText"
-        @keydown.enter="addTodo">
-    </div>
+    
   </div>
 </template>
 
